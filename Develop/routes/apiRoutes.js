@@ -2,10 +2,11 @@ const notes = require('express').Router();
 const fs = require('fs')
 // const noteData = require('./db/db.json')
 const uuid = require('../helpers/uuid')
+const readNotes = require('../helpers/fsUtils')
 
 notes.get('/notes', (req, res) => {
     console.info(`${req.method} request made`);
-  
+
     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
       if(err) {
         console.log(err)
