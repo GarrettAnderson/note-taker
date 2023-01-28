@@ -23,9 +23,15 @@ app.get('/notes', (req, res) => {
 app.get('/api/notes', (req, res) => {
   console.info(`${req.method} request made`);
 
+  fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+    if(err) {
+      console.log(err)
+    } else {
+      res.status(200).send(data);
+    }
+  })
   // console.log(noteData)
-  res.status(200).json(noteData);
-  // res.send(noteData)
+  // res.send(noteData) 
 })
 
 app.post('/api/notes', (req, res) => {
@@ -35,7 +41,7 @@ app.post('/api/notes', (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: uuid()
+      id: uuid()
     }
     console.log(newNote)
     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
@@ -48,21 +54,23 @@ app.post('/api/notes', (req, res) => {
         fs.writeFile(
           './db/db.json',
           JSON.stringify(parsedNotes, null, 4),
-          (writeErr) =>
+          (writeErr) => {
             writeErr
               ? console.error(writeErr)
               : console.info('Successfully updated reviews!')
+              res.json(parsedNotes)
+          }
         )
       }
     })
     
-    const response = {
-      status: 'success',
-      body: newNote
-    }
+    // const response = {
+    //   status: 'success',
+    //   body: newNote
+    // }
 
-    console.log(response)
-    res.status(200).json(response)
+    // console.log(response)
+    // res.status(200).json(response) 
   } else {
     res.status(500).json('Error in posting review');
 
@@ -70,25 +78,17 @@ app.post('/api/notes', (req, res) => {
 })
 
 
-app.delete('/api/notes/:note_id', (req, res) => {
-  let noteId = req.params.note_id ? req.params.note_id : '123'
+app.delete('/api/notes/:id', (req, res) => {
+  let noteId = req.params.id
   console.info(`${noteId} called to remove note`)
   // read notes from db/db.json
   let db = JSON.parse(fs.readFileSync('./db/db.json'))
   console.log(db)
-  // let deleteNotes = db.filter((note) => note.note_id !== req.params.id)
-  let deletedNotes = []
+  let deleteNotes = db.filter((note) => note.id !== req.params.id)
+  console.log(deleteNotes)
 
-  for (var i = 0; i < db.length; i++) {
-    console.log(req.params.note_id)
-    if (db[i].note_id === req.params.id) {
-      deletedNotes.push(db[i].note_id)
-    }
-  }
-  console.log(deletedNotes)
-
-  // fs.writeFileSync('./db/db.json', JSON.stringify(deleteNotes))
-  res.json(db)
+  fs.writeFileSync('./db/db.json', JSON.stringify(deleteNotes))
+  res.json(deleteNotes)
 })
 
 
