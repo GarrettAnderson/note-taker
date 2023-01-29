@@ -2,11 +2,15 @@ const notes = require('express').Router();
 const fs = require('fs')
 // const noteData = require('./db/db.json')
 const uuid = require('../helpers/uuid')
-const readNotes = require('../helpers/fsUtils')
+const note = require('../helpers/fsUtils')
 
 notes.get('/notes', (req, res) => {
     console.info(`${req.method} request made`);
-
+    // note.getAllNotes()
+    //     .then((notes) => {
+    //         return res.json(notes)
+    //     })
+    // .catch((error) => res.status(500).json(error))
     fs.readFile('./db/db.json', 'utf-8', (err, data) => {
       if(err) {
         console.log(err)
@@ -21,7 +25,7 @@ notes.get('/notes', (req, res) => {
 
 
 notes.post('/notes', (req, res) => {
-    console.table(`${req.body.title} ${req.body.text} POST call received`)
+    console.info(`${req.body.title} ${req.body.text} POST call received`)
     const { title, text } = req.body
     if (title && text) {
       const newNote = {
@@ -59,7 +63,6 @@ notes.post('/notes', (req, res) => {
       // res.status(200).json(response) 
     } else {
       res.status(500).json('Error in posting review');
-  
     }
   })
   
