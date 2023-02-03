@@ -13,7 +13,7 @@ Once index.html is created, open repository in VSCode and right click on index.h
 
 ## Usage
 
-
+Add note in given area. Click on the 'save' icon in the top left. Notice note renders on the left of the screen. Click 'delete' icon to remove note.
 
 To view this application on Github click [here](https://github.com/GarrettAnderson/note-taker).
 
@@ -22,8 +22,9 @@ To view the live application click [here](https://afternoon-spire-52995.herokuap
 
 Below is a screenshot of the project:
 
-![](assets/images/screenshot.png)
+![](public/assets/images/screenshot1.png)
 
+![](public/assets/images/screenshot2.png)
 
 ## Credits
 
