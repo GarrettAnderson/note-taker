@@ -3,7 +3,7 @@ An application to take notes with focus on back-end logic.
 
 ## Description
 
-Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person.
+An ExpressJS application that allows user to add and delete notes. 
 
 ## Installation
 
@@ -13,7 +13,7 @@ Once index.html is created, open repository in VSCode and right click on index.h
 
 ## Usage
 
-Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person. To run the program, right click on index.js and click 'open in integrated terminal' to open the terminal in VS Code. Run 'node index' and follow the prompts.
+
 
 To view this application on Github click [here](https://github.com/GarrettAnderson/note-taker).
 
